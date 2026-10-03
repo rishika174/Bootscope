@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/bootscope_tests.dir/link.d CMakeFiles/bootscope_tests.dir/tests/test_bootscope.cpp.o -o bootscope_tests  libbootscope_core.a

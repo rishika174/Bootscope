@@ -1,0 +1,19 @@
+{
+  "system": {
+    "os": "Ubuntu 26.04.1 LTS",
+    "kernel": "7.0.0-38-generic",
+    "arch": "aarch64",
+    "cores": 4,
+    "memory_mb": 3383
+  },
+  "timings": {
+    "firmware_sec": 0,
+    "loader_sec": 0,
+    "kernel_sec": 0.203,
+    "initrd_sec": 1.356,
+    "userspace_sec": 3.812,
+    "total_sec": 5.371
+  },
+  "critical_chain_sec": 5.197,
+  "bottleneck_count": 49
+}

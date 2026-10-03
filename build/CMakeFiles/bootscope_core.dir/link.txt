@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbootscope_core.a CMakeFiles/bootscope_core.dir/src/boot_collector.cpp.o CMakeFiles/bootscope_core.dir/src/service_analyzer.cpp.o CMakeFiles/bootscope_core.dir/src/dependency_graph.cpp.o CMakeFiles/bootscope_core.dir/src/bottleneck_detector.cpp.o CMakeFiles/bootscope_core.dir/src/report_generator.cpp.o
+/usr/bin/ranlib libbootscope_core.a

@@ -1,0 +1,45 @@
+@startuml
+class BootCollector {
+  - m_timings: BootTimings
+  - m_hardware: SystemHardware
+  + collectAll(): bool
+  + collectTimings(): bool
+  + collectHardware(): bool
+  + getTimings(): BootTimings
+  + getHardware(): SystemHardware
+  + {static} executeCommand(cmd: string): string
+}
+
+class ServiceAnalyzer {
+  - m_services: vector<ServiceUnit>
+  + parseBlameData(output: string): bool
+  + inspectUnitDependencies(unit: ServiceUnit&): bool
+  + getSlowServices(threshold: double): vector<ServiceUnit>
+  + getAllServices(): vector<ServiceUnit>
+}
+
+class DependencyGraph {
+  - m_nodes: unordered_map<string, GraphNode>
+  + buildFromServices(services: vector<ServiceUnit>): void
+  + addEdge(from: string, to: string): void
+  + hasCycles(): bool
+  + topologicalSort(): vector<string>
+  + computeCriticalPath(target: string): CriticalChainResult
+}
+
+class BottleneckDetector {
+  - m_warning_sec: double
+  - m_critical_sec: double
+  + analyze(services: vector<ServiceUnit>, chain: CriticalChainResult): vector<BottleneckFinding>
+}
+
+class ReportGenerator {
+  + generate(format: ReportFormat): string
+  + exportToFile(filepath: string, format: ReportFormat): bool
+}
+
+BootCollector ..> ServiceAnalyzer : feeds hardware context
+ServiceAnalyzer --> DependencyGraph : provides service nodes
+DependencyGraph --> BottleneckDetector : provides critical chain
+BottleneckDetector --> ReportGenerator : provides audit findings
+@enduml

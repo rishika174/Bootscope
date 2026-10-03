@@ -1,0 +1,10 @@
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/bootscope_core.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/bootscope.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/bootscope_tests.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/test.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/edit_cache.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/rebuild_cache.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/list_install_components.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/install.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/install/local.dir
+/home/rishika/Downloads/bootscope/bootscope/build/CMakeFiles/install/strip.dir

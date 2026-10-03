@@ -1,0 +1,19 @@
+@startuml
+[*] --> PowerOn : Hardware Reset
+PowerOn --> UEFI_Firmware : POST Initialization
+UEFI_Firmware --> BootLoader : Hand off to GRUB / systemd-boot
+BootLoader --> LinuxKernel : Load vmlinuz & initramfs
+LinuxKernel --> InitrdStage : Mount volatile root fs & cryptsetup
+InitrdStage --> SystemdPID1 : Switch root (/sbin/init)
+
+state SystemdPID1 {
+  [*] --> sysinit_target : Start udevd & journald
+  sysinit_target --> basic_target : Sockets & Timers active
+  basic_target --> network_target : Network stack initialization
+  network_target --> multi_user_target : Background system daemons
+  multi_user_target --> graphical_target : Display Manager (GDM/SDDM)
+}
+
+graphical_target --> DesktopReady : Boot Complete
+DesktopReady --> [*]
+@enduml

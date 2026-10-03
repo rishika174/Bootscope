@@ -1,0 +1,48 @@
+@startuml
+actor User
+participant "CLI (main.cpp)" as Main
+participant BootCollector as Collector
+participant ServiceAnalyzer as Analyzer
+participant DependencyGraph as Graph
+participant BottleneckDetector as Detector
+participant ReportGenerator as Reporter
+
+User -> Main: bootscope --analyze --threshold 1.5s
+activate Main
+
+Main -> Collector: collectAll()
+activate Collector
+Collector -> "/proc/uptime": read uptime
+Collector -> "systemd-analyze time": popen()
+Collector --> Main: BootTimings & Hardware
+deactivate Collector
+
+Main -> Analyzer: parseBlameData()
+activate Analyzer
+Analyzer -> "systemd-analyze blame": popen()
+Analyzer -> "systemctl show": read After=/Before=
+Analyzer --> Main: vector<ServiceUnit>
+deactivate Analyzer
+
+Main -> Graph: buildFromServices(services)
+activate Graph
+Main -> Graph: computeCriticalPath("graphical.target")
+Graph -> Graph: topologicalSort()
+Graph -> Graph: longestPathDP()
+Graph --> Main: CriticalChainResult
+deactivate Graph
+
+Main -> Detector: analyze(services, CriticalChain)
+activate Detector
+Detector -> Detector: evaluateRules()
+Detector --> Main: vector<BottleneckFinding>
+deactivate Detector
+
+Main -> Reporter: generate(ReportFormat::Terminal)
+activate Reporter
+Reporter --> Main: Formatted ANSI Audit
+deactivate Reporter
+
+Main --> User: Display Terminal Report
+deactivate Main
+@enduml
